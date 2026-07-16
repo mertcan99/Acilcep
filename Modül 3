@@ -1,0 +1,193 @@
+lib/
+ ├── models/
+ │     algorithm.dart
+ │
+ ├── data/
+ │     algorithms_data.dart
+ │
+ ├── screens/
+ │     algorithms_screen.dart
+ │     algorithm_detail_screen.dart
+ │
+ └── widgets/
+       algorithm_card.dart
+class Algorithm {
+
+  final String title;
+  final String icon;
+  final List<String> steps;
+
+  Algorithm({
+    required this.title,
+    required this.icon,
+    required this.steps,
+  });
+
+}
+import '../models/algorithm.dart';
+
+final List<Algorithm> algorithms = [
+
+  Algorithm(
+    title: "Kardiyak Arrest",
+    icon: "❤️",
+    steps: [
+      "Bilinç kontrolü",
+      "112 / ekip çağır",
+      "CPR başlat",
+      "Defibrilatörü bağla",
+      "Ritim analizi",
+      "Şoklanabilir ritim ise defibrilasyon",
+      "2 dakika CPR",
+      "Tekrar ritim analizi"
+    ],
+  ),
+
+  Algorithm(
+    title: "Anafilaksi",
+    icon: "💉",
+    steps: [
+      "ABC değerlendirmesi",
+      "IM Adrenalin",
+      "Oksijen",
+      "IV damar yolu",
+      "Sıvı tedavisi",
+      "Monitörizasyon",
+      "Nakil"
+    ],
+  ),
+
+];
+import 'package:flutter/material.dart';
+
+class AlgorithmCard extends StatelessWidget {
+
+  final String title;
+  final String icon;
+  final VoidCallback onTap;
+
+  const AlgorithmCard({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context){
+
+    return Card(
+      child: ListTile(
+        leading: Text(icon,style: const TextStyle(fontSize:30)),
+        title: Text(title),
+        trailing: const Icon(Icons.arrow_forward_ios),
+        onTap: onTap,
+      ),
+    );
+
+  }
+}
+import 'package:flutter/material.dart';
+
+import '../data/algorithms_data.dart';
+import '../widgets/algorithm_card.dart';
+import 'algorithm_detail_screen.dart';
+
+class AlgorithmsScreen extends StatelessWidget {
+
+  const AlgorithmsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context){
+
+    return Scaffold(
+
+      appBar: AppBar(
+        title: const Text("Acil Algoritmalar"),
+      ),
+
+      body: ListView.builder(
+
+        itemCount: algorithms.length,
+
+        itemBuilder: (context,index){
+
+          final algorithm=algorithms[index];
+
+          return AlgorithmCard(
+
+            title: algorithm.title,
+
+            icon: algorithm.icon,
+
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:(_)=>AlgorithmDetailScreen(
+                    algorithm: algorithm,
+                  ),
+                ),
+              );
+            },
+
+          );
+
+        },
+
+      ),
+
+    );
+
+  }
+
+}
+import 'package:flutter/material.dart';
+
+import '../models/algorithm.dart';
+
+class AlgorithmDetailScreen extends StatelessWidget {
+
+  final Algorithm algorithm;
+
+  const AlgorithmDetailScreen({
+    super.key,
+    required this.algorithm,
+  });
+
+  @override
+  Widget build(BuildContext context){
+
+    return Scaffold(
+
+      appBar: AppBar(
+        title: Text(algorithm.title),
+      ),
+
+      body: ListView.builder(
+
+        itemCount: algorithm.steps.length,
+
+        itemBuilder:(context,index){
+
+          return ListTile(
+
+            leading: CircleAvatar(
+              child: Text("${index+1}"),
+            ),
+
+            title: Text(
+              algorithm.steps[index],
+            ),
+
+          );
+
+        },
+
+      ),
+
+    );
+
+  }
+
+}
