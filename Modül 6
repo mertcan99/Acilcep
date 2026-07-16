@@ -1,0 +1,106 @@
+lib/
+├── models/
+│   └── case_model.dart
+├── data/
+│   └── case_data.dart
+├── screens/
+│   ├── cases_screen.dart
+│   ├── case_detail_screen.dart
+│   └── quiz_result_screen.dart
+├── widgets/
+│   └── answer_card.dart
+class CaseModel {
+  final String title;
+  final String scenario;
+  final List<String> options;
+  final int correctIndex;
+  final String explanation;
+
+  CaseModel({
+    required this.title,
+    required this.scenario,
+    required this.options,
+    required this.correctIndex,
+    required this.explanation,
+  });
+}
+import '../models/case_model.dart';
+
+final List<CaseModel> caseList = [
+
+  CaseModel(
+    title: "Göğüs Ağrısı",
+    scenario:
+        "58 yaşında erkek hasta, göğüs ağrısı ve soğuk terleme ile başvuruyor. Bilinci açık, TA 140/90 mmHg, SpO₂ %96.",
+    options: [
+      "Hastayı değerlendirmeye devam et ve 12 derivasyon EKG çek.",
+      "Hastayı ayağa kaldırıp yürüt.",
+      "Hastayı taburcu et.",
+      "Hiçbir işlem yapma."
+    ],
+    correctIndex: 0,
+    explanation:
+        "Göğüs ağrısı olan hastalarda erken değerlendirme ve 12 derivasyon EKG çekilmesi kritik öneme sahiptir.",
+  ),
+
+];
+ListView.builder(
+  itemCount: caseList.length,
+  itemBuilder: (context, index) {
+    return ListTile(
+      title: Text(caseList[index].title),
+      trailing: const Icon(Icons.arrow_forward_ios),
+    );
+  },
+);
+--------------------------------
+
+🚑 Vaka 1
+
+58 yaşında erkek hasta...
+
+Ne yaparsınız?
+
+○ A
+
+○ B
+
+○ C
+
+○ D
+
+[CEVABI GÖNDER]
+
+--------------------------------
+if(selected == case.correctIndex){
+
+score += 10;
+
+}else{
+
+score += 0;
+
+}
+✅ Doğru
+
++10 Puan
+
+Açıklama
+
+Göğüs ağrısı bulunan hastada ilk değerlendirme tamamlandıktan sonra 12 derivasyon EKG çekilmesi ve uygun ileri değerlendirme yapılması gerekir.
+❌ Yanlış
+
+Doğru cevap:
+
+A
+
+Açıklama
+
+Göğüs ağrısı hastasında öncelik hızlı değerlendirme ve EKG'dir.
+class UserScore {
+
+int totalScore=0;
+
+int solvedCases=0;
+
+}
