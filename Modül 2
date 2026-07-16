@@ -1,0 +1,37 @@
+CREATE TABLE drugs(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  category TEXT,
+  indication TEXT,
+  contraindication TEXT,
+  adultDose TEXT,
+  pediatricDose TEXT,
+  route TEXT,
+  sideEffects TEXT,
+  notes TEXT
+);
+class Drug {
+  final int? id;
+  final String name;
+  final String category;
+  final String indication;
+  final String contraindication;
+  final String adultDose;
+  final String pediatricDose;
+  final String route;
+  final String sideEffects;
+  final String notes;
+
+  Drug({
+    this.id,
+    required this.name,
+    required this.category,
+    required this.indication,
+    required this.contraindication,
+    required this.adultDose,
+    required this.pediatricDose,
+    required this.route,
+    required this.sideEffects,
+    required this.notes,
+  });
+}
