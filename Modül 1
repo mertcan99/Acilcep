@@ -1,0 +1,51 @@
+lib/
+│
+├── main.dart
+├── theme/
+│   └── app_theme.dart
+├── screens/
+│   ├── home_screen.dart
+│   ├── drugs_screen.dart
+│   ├── algorithms_screen.dart
+│   ├── calculators_screen.dart
+│   ├── ecg_screen.dart
+│   ├── cases_screen.dart
+│   └── settings_screen.dart
+├── widgets/
+│   └── home_card.dart
+└── models/
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  go_router: ^14.2.0
+  provider: ^6.1.2
+  sqflite: ^2.3.3
+  path: ^1.9.0
+  shared_preferences: ^2.3.0
+  flutter_svg: ^2.0.10
+import 'package:flutter/material.dart';
+import 'screens/home_screen.dart';
+
+void main() {
+  runApp(const AcilCep());
+}
+
+class AcilCep extends StatelessWidget {
+  const AcilCep({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "AcilCep",
+      theme: ThemeData(
+        colorSchemeSeed: Colors.red,
+        useMaterial3: true,
+      ),
+      home: const HomeScreen(),
+    );
+  }
+}
