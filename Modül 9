@@ -1,0 +1,110 @@
+lib/
+├── models/
+│   inventory_item.dart
+├── database/
+│   inventory_database.dart
+├── screens/
+│   inventory_screen.dart
+│   add_item_screen.dart
+│   item_detail_screen.dart
+├── services/
+│   expiry_service.dart
+└── widgets/
+    inventory_card.dart
+class InventoryItem {
+  final int? id;
+  final String name;
+  final String category;
+  final int quantity;
+  final int minimumStock;
+  final DateTime? expiryDate;
+  final String location;
+
+  InventoryItem({
+    this.id,
+    required this.name,
+    required this.category,
+    required this.quantity,
+    required this.minimumStock,
+    this.expiryDate,
+    required this.location,
+  });
+}
+CREATE TABLE inventory(
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ name TEXT,
+ category TEXT,
+ quantity INTEGER,
+ minimumStock INTEGER,
+ expiryDate TEXT,
+ location TEXT
+);
+class InventoryScreen extends StatelessWidget {
+  const InventoryScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Ambulans Envanteri"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+      body: ListView(),
+    );
+  }
+}
+Card(
+ child: ListTile(
+   leading: const Icon(Icons.medication),
+   title: Text(item.name),
+   subtitle: Text(
+     "Stok: ${item.quantity}",
+   ),
+   trailing: Icon(
+     item.quantity <= item.minimumStock
+       ? Icons.warning
+       : Icons.check_circle,
+   ),
+ ),
+);
+bool isExpired(DateTime expiryDate) {
+  return expiryDate.isBefore(DateTime.now());
+}
+
+bool willExpireSoon(DateTime expiryDate) {
+  return expiryDate.difference(DateTime.now()).inDays <= 30;
+}
+List<InventoryItem> searchItems(
+  String query,
+  List<InventoryItem> items,
+) {
+  return items
+      .where((e) =>
+          e.name.toLowerCase().contains(query.toLowerCase()))
+      .toList();
+}
+if(item.quantity <= item.minimumStock){
+
+showDialog(
+
+context: context,
+
+builder: (_) => const AlertDialog(
+
+title: Text("Kritik Stok"),
+
+content: Text("Bu ürün minimum stok seviyesinde."),
+
+),
+
+);
+
+}
+⚠ Midazolam
+
+Son kullanma tarihi
+
+12 gün kaldı
