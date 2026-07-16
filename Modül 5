@@ -1,0 +1,127 @@
+lib/
+├── models/
+│   └── calculator_model.dart
+├── services/
+│   └── calculator_service.dart
+├── screens/
+│   ├── calculators_screen.dart
+│   ├── gcs_screen.dart
+│   ├── map_screen.dart
+│   ├── burn_screen.dart
+│   ├── pediatric_dose_screen.dart
+│   └── apgar_screen.dart
+└── widgets/
+    └── calculator_card.dart
+class CalculatorModel {
+  final String title;
+  final IconData icon;
+  final String route;
+
+  CalculatorModel({
+    required this.title,
+    required this.icon,
+    required this.route,
+  });
+}
+class CalculatorService {
+
+  // Ortalama Arter Basıncı (MAP)
+  static double calculateMAP({
+    required int systolic,
+    required int diastolic,
+  }) {
+    return (systolic + 2 * diastolic) / 3;
+  }
+
+  // Glasgow Koma Skalası
+  static int calculateGCS({
+    required int eye,
+    required int verbal,
+    required int motor,
+  }) {
+    return eye + verbal + motor;
+  }
+
+  // Pediatrik doz
+  static double calculateDose({
+    required double weightKg,
+    required double mgPerKg,
+    double? maxDose,
+  }) {
+    double dose = weightKg * mgPerKg;
+
+    if (maxDose != null && dose > maxDose) {
+      return maxDose;
+    }
+
+    return dose;
+  }
+}
+final calculators = [
+  "Glasgow Koma Skalası",
+  "MAP",
+  "APGAR",
+  "Pediatrik Doz",
+  "Yanık Yüzdesi",
+  "Şok İndeksi",
+  "BMI",
+];
+Göz Açma
+(4-1)
+
+Sözel Yanıt
+(5-1)
+
+Motor Yanıt
+(6-1)
+
+[HESAPLA]
+Sistolik
+120
+
+Diyastolik
+80
+
+[HESAPLA]
+İlaç
+
+Adrenalin
+
+Hasta
+
+18 kg
+
+Doz
+
+0.01 mg/kg
+
+Maksimum
+
+0.5 mg
+
+[HESAPLA]
+0.18 mg
+
+1 mg/mL çözeltide
+
+0.18 mL
+Baş
+
+✓
+
+Sağ Kol
+
+✓
+
+Göğüs
+
+✓
+
+Toplam
+
+27%
+APGAR
+
+8 / 10
+
+Yenidoğan durumu iyi
