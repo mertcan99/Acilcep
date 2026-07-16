@@ -1,0 +1,35 @@
+lib/
+├── models/
+│   shift_model.dart
+├── screens/
+│   shift_screen.dart
+│   add_shift_screen.dart
+├── services/
+│   notification_service.dart
+└── database/
+    shift_database.dart
+class ShiftModel {
+  final int? id;
+  final DateTime startTime;
+  final DateTime endTime;
+  final String station;
+  final String team;
+  final String note;
+
+  ShiftModel({
+    this.id,
+    required this.startTime,
+    required this.endTime,
+    required this.station,
+    required this.team,
+    required this.note,
+  });
+}
+CREATE TABLE shifts(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  startTime TEXT,
+  endTime TEXT,
+  station TEXT,
+  team TEXT,
+  note TEXT
+);
