@@ -1,0 +1,22 @@
+lib/
+├── models/
+│   patient_case.dart
+├── database/
+│   case_database.dart
+├── screens/
+│   case_list_screen.dart
+│   new_case_screen.dart
+│   case_detail_screen.dart
+│   transfer_screen.dart
+└── services/
+    pdf_service.dart
+
+class PatientCase {
+  final String patientName;
+  final int age;
+  final String gender;
+  final String complaint;
+  final String diagnosis;
+  final String hospital;
+  final DateTime date;
+}
