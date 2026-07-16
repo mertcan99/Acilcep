@@ -1,0 +1,283 @@
+lib/
+├── models/
+│   └── ecg_model.dart
+├── data/
+│   └── ecg_data.dart
+├── screens/
+│   ├── ecg_screen.dart
+│   ├── ecg_detail_screen.dart
+│   └── ecg_quiz_screen.dart
+├── widgets/
+│   └── ecg_card.dart
+└── assets/
+    └── ecg/
+        sinus.jpg
+        af.jpg
+        svt.jpg
+        vt.jpg
+        vf.jpg
+        asystole.jpg
+class EcgModel {
+
+  final String title;
+  final String image;
+  final String description;
+  final List<String> findings;
+
+  EcgModel({
+    required this.title,
+    required this.image,
+    required this.description,
+    required this.findings,
+  });
+
+}
+import '../models/ecg_model.dart';
+
+final List<EcgModel> ecgList = [
+
+EcgModel(
+
+title: "Sinüs Ritmi",
+
+image: "assets/ecg/sinus.jpg",
+
+description: "Normal sinüs ritmi",
+
+findings: [
+
+"P dalgası mevcut",
+
+"Her P sonrası QRS",
+
+"Hız 60-100/dk",
+
+"PR 120-200 ms",
+
+],
+
+),
+
+EcgModel(
+
+title: "Atriyal Fibrilasyon",
+
+image: "assets/ecg/af.jpg",
+
+description: "Düzensiz dar QRS ritmi",
+
+findings: [
+
+"P dalgası yok",
+
+"İrregüler ritim",
+
+"Değişken RR",
+
+],
+
+),
+
+];
+import 'package:flutter/material.dart';
+
+class EcgCard extends StatelessWidget {
+
+final String title;
+
+final String image;
+
+final VoidCallback onTap;
+
+const EcgCard({
+
+super.key,
+
+required this.title,
+
+required this.image,
+
+required this.onTap,
+
+});
+
+@override
+
+Widget build(BuildContext context){
+
+return Card(
+
+child: ListTile(
+
+leading: Image.asset(image,width:60),
+
+title: Text(title),
+
+trailing: const Icon(Icons.arrow_forward_ios),
+
+onTap:onTap,
+
+),
+
+);
+
+}
+
+}
+class EcgScreen extends StatelessWidget {
+
+const EcgScreen({super.key});
+
+@override
+
+Widget build(BuildContext context){
+
+return Scaffold(
+
+appBar: AppBar(
+
+title: const Text("EKG Eğitim"),
+
+),
+
+body: ListView.builder(
+
+itemCount: ecgList.length,
+
+itemBuilder:(context,index){
+
+final ecg=ecgList[index];
+
+return EcgCard(
+
+title: ecg.title,
+
+image: ecg.image,
+
+onTap:(){
+
+Navigator.push(
+
+context,
+
+MaterialPageRoute(
+
+builder:(_)=>EcgDetailScreen(ecg:ecg),
+
+),
+
+);
+
+},
+
+);
+
+},
+
+),
+
+);
+
+}
+
+}
+class EcgDetailScreen extends StatelessWidget {
+
+final EcgModel ecg;
+
+const EcgDetailScreen({
+
+super.key,
+
+required this.ecg,
+
+});
+
+@override
+
+Widget build(BuildContext context){
+
+return Scaffold(
+
+appBar: AppBar(
+
+title: Text(ecg.title),
+
+),
+
+body: SingleChildScrollView(
+
+padding: const EdgeInsets.all(20),
+
+child: Column(
+
+crossAxisAlignment: CrossAxisAlignment.start,
+
+children: [
+
+Image.asset(ecg.image),
+
+const SizedBox(height:20),
+
+Text(
+
+ecg.description,
+
+style: const TextStyle(
+
+fontSize:18,
+
+fontWeight: FontWeight.bold,
+
+),
+
+),
+
+const SizedBox(height:20),
+
+...ecg.findings.map(
+
+(item)=>ListTile(
+
+leading: const Icon(Icons.check),
+
+title: Text(item),
+
+),
+
+),
+
+],
+
+),
+
+),
+
+);
+
+}
+
+}
+--------------------------
+
+Bu ritim hangisidir?
+
+[EKG Görseli]
+
+A) SVT
+
+B) AF
+
+C) VF
+
+D) Sinüs Ritmi
+
+--------------------------
+✅ Doğru
+
++10 puan
+❌ Yanlış
+
+Doğru cevap:
+
+Atriyal Fibrilasyon
