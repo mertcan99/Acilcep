@@ -1,0 +1,33 @@
+lib/
+│
+├── core/
+│   ├── constants/
+│   ├── theme/
+│   ├── routes/
+│   ├── utils/
+│   └── services/
+│
+├── database/
+│   ├── sqlite/
+│   └── firebase/
+│
+├── models/
+│
+├── providers/
+│
+├── screens/
+│   ├── home/
+│   ├── drugs/
+│   ├── ecg/
+│   ├── algorithms/
+│   ├── calculators/
+│   ├── cases/
+│   ├── inventory/
+│   ├── shifts/
+│   ├── hospitals/
+│   ├── profile/
+│   └── settings/
+│
+├── widgets/
+├── assets/
+└── main.dart
